@@ -1,0 +1,50 @@
+<h3>Cart</h3>
+
+<p>
+    <a routerLink="/shipping"> Shipping Prices</a>
+    <br><br><br>
+</p>
+
+<div class="cart-item" *ngIf="items.length > 0">
+    <table>
+        <tr>
+            <th>product name</th>
+            <th>price</th>
+            <th>count</th>
+            <th>total</th>
+            <th>operation</th>
+        </tr>
+        <tr *ngFor="let item of items">
+            <td>{{item.data.name}}</td>
+            <td>{{item.data.price}}</td>
+            <td>{{item.count}}</td>
+            <td>{{item.count * item.data.price | currency}}</td>
+            <td><button (click)="remove(item.productId)">remove</button> </td>
+        </tr>
+        <tr>
+            <td colspan="5" align="right">
+                <button (click)="removeAll()"> clear all</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div *ngIf="items.length > 0">
+    <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="name"> Name </label>
+            <input id="name" type="text" formControlName="name" placeholder="please input your name" />
+        </div>
+        <div>
+            <label for="address"> Address </label>
+            <input id="address" type="text" formControlName="address" placeholder="please input your address" />
+        </div>
+
+        <button class="button" type="submit"> place order</button>
+    </form>
+</div>
+
+<div *ngIf="items.length <= 0">
+    <p>the cart is empty now. </p>
+    <p>try to add some goods first</p>
+</div>

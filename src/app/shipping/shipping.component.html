@@ -1,0 +1,12 @@
+<h3>Shipping Prices</h3>
+
+<table border="1">
+  <tr>
+    <th>type</th>
+    <th>price</th>
+  </tr>
+  <tr *ngFor="let shipping of shippingCosts | async">
+    <td>{{ shipping.type }}</td>
+    <td>{{ shipping.price | currency }}</td>
+  </tr>
+</table>
